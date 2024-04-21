@@ -1,0 +1,14 @@
+<!-- messages.wxml -->
+<view class="container">
+  <scroll-view class="message-list" scroll-y="true">
+    <block wx:for="{{messages}}" wx:key="id">
+      <view class="message-item" bindtap="openMessage" data-id="{{item.id}}">
+        <view class="message-header">
+          <text class="message-sender">{{item.sender}}</text>
+          <text class="message-time">{{item.time}}</text>
+        </view>
+        <text class="message-summary">{{item.summary}}</text>
+      </view>
+    </block>
+  </scroll-view>
+</view>

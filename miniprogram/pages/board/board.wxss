@@ -1,0 +1,30 @@
+/* board.wxss */
+.container {
+  padding: 20rpx;
+}
+
+.board-list {
+  width: 100%;
+}
+
+.board-item {
+  margin-bottom: 30rpx;
+  padding: 30rpx;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+}
+
+.board-header {
+  display: flex;
+  flex-direction: column;
+}
+
+.board-title {
+  font-weight: bold;
+  font-size: 36rpx;
+}
+
+.board-description {
+  color: #666;
+  font-size: 28rpx;
+}

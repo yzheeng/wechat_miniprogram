@@ -1,0 +1,13 @@
+<!-- board.wxml -->
+<view class="container">
+  <scroll-view class="board-list" scroll-y="true">
+    <block wx:for="{{boards}}" wx:key="id">
+      <view class="board-item" bindtap="navigateToPosts" data-id="{{item.id}}">
+        <view class="board-header">
+          <text class="board-title">{{item.title}}</text>
+          <text class="board-description">{{item.description}}</text>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+</view>

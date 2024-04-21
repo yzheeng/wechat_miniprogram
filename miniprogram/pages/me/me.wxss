@@ -1,0 +1,34 @@
+/* me.wxss */
+.container {
+  padding: 40rpx;
+}
+
+.user-info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50rpx;
+}
+
+.user-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+}
+
+.user-nickname {
+  margin-top: 20rpx;
+  font-size: 32rpx;
+  color: #333;
+}
+
+.menu-list {
+  width: 100%;
+}
+
+.menu-item {
+  padding: 30rpx;
+  border-top: 1px solid #ccc;
+  text-align: center;
+  font-size: 30rpx;
+}
