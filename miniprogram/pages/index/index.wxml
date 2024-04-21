@@ -1,5 +1,35 @@
 <!--index.wxml-->
 <view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input class="search-input" type="text" placeholder="搜索帖子..." bindinput="onSearchInput" bindfocus="onFocus" bindblur="onBlur" />
+    <view class="search-button">
+      <text>搜索</text>
+    </view>
+  </view>
+  <!-- 置顶信息板块 -->
+  <swiper class="top-posts-swiper" indicator-dots="true" autoplay="false" interval="5000" duration="500">
+    <swiper-item wx:for="{{topPosts}}" wx:key="id">
+      <view class="top-post-item">
+        <!-- <image class="top-post-image" src="{{item.imageUrl}}" mode="aspectFill"></image> -->
+        <text class="top-post-title">{{item.title}}</text>
+      </view>
+    </swiper-item>
+  </swiper>
+  <!-- 分类条和筛选按钮 -->
+  <view class="category-filter-container">
+    <scroll-view class="category-scroll" scroll-x="true">
+      <view class="category-items">
+        <view class="category-item" wx:for="{{categories}}" wx:key="id" data-id="{{item.id}}" bindtap="onCategorySelect">
+          {{item.name}}
+        </view>
+      </view>
+    </scroll-view>
+    <view class="filter-button" bindtap="onFilterTap">
+      ☰
+    </view>
+  </view>
+  <!-- 帖子列表 -->
   <scroll-view class="post-list" scroll-y="true">
     <block wx:for="{{posts}}" wx:key="id">
       <view class="post-item">
