@@ -14,12 +14,13 @@
     "coverView": false,
     "postcss": false,
     "minified": false,
-    "enhance": false,
+    "enhance": true,
     "showShadowRootInWxmlPanel": false,
     "packNpmRelationList": [],
     "ignoreUploadUnusedFiles": true,
     "compileHotReLoad": false,
-    "skylineRenderEnable": true
+    "skylineRenderEnable": true,
+    "es6": true
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
@@ -34,5 +35,7 @@
     "ignore": [],
     "include": []
   },
-  "appid": "wxeec69e0ff5b7b420"
+  "appid": "wx76597eb9e9d5b6dd",
+  "cloudfunctionTemplateRoot": "cloudfunctionTemplate/",
+  "cloudfunctionRoot": "cloudfunctions/"
 }

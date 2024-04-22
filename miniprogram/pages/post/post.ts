@@ -1,66 +1,65 @@
+// import { update } from "XrFrame/kanata/lib/index";
+
 // pages/post/post.ts
 Page({
-
-  /**
-   * 页面的初始数据
-   */
   data: {
-
+    title: '', // 帖子的标题
+    content: '' // 帖子的内容
   },
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad() {
 
+  updateTitle(event: any) {
+    this.setData({
+      title: event.detail.value // 更新标题
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady() {
-
+  updateContent(event: any) {
+    this.setData({
+      content: event.detail.value // 更新内容
+    });
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide() {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload() {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh() {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom() {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage() {
-
+  submitPost() {
+    const { title, content } = this.data;
+    if (!title || !content) {
+      wx.showToast({
+        title: '标题和内容不能为空',
+        icon: 'none'
+      });
+      return;
+    }
+    wx.cloud.callFunction({
+      name: "test"
+    })
+    .then(res=>{
+      console.log(res)
+    })
+    // wx.cloud.callFunction({
+    //   name: 'new_post', // 云函数的名称
+    //   data: {
+    //     title: title,
+    //     content: content
+    //   },
+    //   success: res => {
+    //     wx.showToast({
+    //       title: '提交成功',
+    //       icon: 'success'
+    //     });
+    //     // 清空输入
+    //     this.setData({
+    //       title: '',
+    //       content: ''
+    //     });
+    //   },
+    //   fail: err => {
+    //     console.error('提交失败', err);
+    //     wx.showToast({
+    //       title: '提交失败',
+    //       icon: 'none'
+    //     });
+    //   }
+    // });
+  
+  
   }
-})
+});
+

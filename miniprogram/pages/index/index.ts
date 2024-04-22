@@ -48,6 +48,7 @@ Page({
       }
     ],
   },
+
   //筛选按钮
   onFilterTap: function () {
     wx.showActionSheet({
