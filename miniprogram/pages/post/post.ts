@@ -27,37 +27,34 @@ Page({
       });
       return;
     }
+
+    // call 云函数 new_post, 添加新的post到db
     wx.cloud.callFunction({
-      name: "test"
-    })
-    .then(res=>{
-      console.log(res)
-    })
-    // wx.cloud.callFunction({
-    //   name: 'new_post', // 云函数的名称
-    //   data: {
-    //     title: title,
-    //     content: content
-    //   },
-    //   success: res => {
-    //     wx.showToast({
-    //       title: '提交成功',
-    //       icon: 'success'
-    //     });
-    //     // 清空输入
-    //     this.setData({
-    //       title: '',
-    //       content: ''
-    //     });
-    //   },
-    //   fail: err => {
-    //     console.error('提交失败', err);
-    //     wx.showToast({
-    //       title: '提交失败',
-    //       icon: 'none'
-    //     });
-    //   }
-    // });
+      name: 'new_post', 
+      data: {
+        title: title,
+        content: content
+      },
+      success: res => {
+        wx.showToast({
+          title: '提交成功',
+          icon: 'success'
+        });
+        console.log(res.result)
+        // 清空输入
+        this.setData({
+          title: '',
+          content: ''
+        });
+      },
+      fail: err => {
+        console.error('提交失败', err);
+        wx.showToast({
+          title: '提交失败',
+          icon: 'none'
+        });
+      }
+    });
   
   
   }

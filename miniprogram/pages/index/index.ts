@@ -33,20 +33,28 @@ Page({
     ],
     selectedCategoryId: 1,
     //帖子
-    posts: [
-      {
-        id: 1,
-        title: "帖子标题一",
-        summary: "这里是帖子的简介，最多显示一两行。",
-        time: "2023-04-21"
-      },
-      {
-        id: 2,
-        title: "帖子标题二",
-        summary: "这里是帖子的简介，最多显示一两行。",
-        time: "2023-04-20"
-      }
-    ],
+    posts: [],
+  },
+
+  onLoad: function () {
+    wx.cloud.callFunction({
+      name: 'get_post' // 确保云函数名称正确
+    })
+      .then(res => {
+        console.log('帖子数据获取成功:', res.result);
+        this.setData({
+          posts: res.result.data.map(post => ({
+            id: post._id, // 确保这里是 _id 映射到 id
+            title: post.title,
+            content: post.content,
+            time: post.time,
+            imageUrl: post.imageUrl  // 如果有图片URL
+          }))
+        });
+      })
+      .catch(err => {
+        console.error('帖子数据获取失败:', err);
+      });
   },
 
   //筛选按钮
@@ -63,5 +71,5 @@ Page({
     });
   }
 
-  
+
 })

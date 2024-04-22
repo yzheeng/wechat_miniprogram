@@ -1,22 +1,20 @@
-// 引入微信服务器 SDK
-const cloud = require('wx-server-sdk');
+// 云函数入口文件
+const cloud = require('wx-server-sdk')
 
-// 初始化 cloud
-cloud.init({
-  env: cloud.DYNAMIC_CURRENT_ENV // 自动获取环境
-});
+cloud.init( )
+const db = cloud.database() 
 
 exports.main = async (event, context) => {
-  const db = cloud.database();
   const { title, content } = event;
+  const now = new Date();
 
   try {
-    // 向数据库的 generalPost 集合添加数据
+    // 向“general_post”添加数据
     const result = await db.collection('general_post').add({
       data: {
         title: title,
         content: content,
-        createTime: db.serverDate() // 服务器时间
+        time: now
       }
     });
     return {
