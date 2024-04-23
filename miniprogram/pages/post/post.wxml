@@ -1,2 +1,12 @@
-<!--pages/post/post.wxml-->
-<text>pages/post/post.wxml</text>
+<!-- pages/post/post.wxml -->
+<view class="container">
+  <view class="title-group">
+    <text class="label">标题:</text>
+    <input class="input-title" type="text" placeholder="请输入标题" value="{{title}}" bindinput="updateTitle"/>
+  </view>
+  <view class="content-group">
+    <text class="label">内容:</text>
+    <textarea class="textarea-content" placeholder="请输入内容" value="{{content}}" bindinput="updateContent"/>
+  </view>
+  <button class="submit-btn" bindtap="submitPost">提交</button>
+</view>

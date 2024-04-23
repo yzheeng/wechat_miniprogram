@@ -4,7 +4,8 @@
     "pages/board/board",
     "pages/messages/messages",
     "pages/me/me",
-    "pages/post/post" 
+    "pages/post/post"
+    
   ],
   "window": {
     "navigationBarTextStyle": "black",

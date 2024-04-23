@@ -1,4 +1,11 @@
 // index.ts
+interface Post {
+  _id: string;
+  title: string;
+  content: string;
+  time: string;
+}
+
 Page({
   data: {
     //置顶信息
@@ -32,29 +39,59 @@ Page({
       { id: 9, name: "xx" },
     ],
     selectedCategoryId: 1,
-    //帖子
-    posts: [
-      {
-        id: 1,
-        title: "帖子标题一",
-        summary: "这里是帖子的简介，最多显示一两行。",
-        time: "2023-04-21"
-      },
-      {
-        id: 2,
-        title: "帖子标题二",
-        summary: "这里是帖子的简介，最多显示一两行。",
-        time: "2023-04-20"
-      }
-    ],
   },
+
+  onPullDownRefresh:function(){
+    this.fetchPosts();
+    // wx.stopPullDownRefresh();
+  },
+
+  fetchPosts: function(){
+    wx.cloud.callFunction({
+      // 云函数名称
+      name: 'get_post'    
+    })
+    .then((res: any) => {
+      console.log('帖子数据获取成功:', res);
+      wx.stopPullDownRefresh();
+        this.setData({
+          // posts 对应发帖列表， post是fetch过来的data
+          posts: res.result.data.map((post: Post) => ({
+            id: post._id, 
+            title: post.title,
+            content: post.content,
+            time: this.formatDateToHourMinute(new Date(post.time)),
+
+          }))
+        });
+      })
+      .catch(err => {
+        console.error('帖子数据获取失败:', err);
+        wx.stopPullDownRefresh();
+      });
+  },
+
+  //默认启动
+  onLoad: function () {
+    this.fetchPosts();
+  },
+
+  // Date 类型格式转换
+  formatDateToHourMinute: function (date: Date): string {
+    const year = date.getFullYear(); 
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = date.getDate().toString().padStart(2, '0'); 
+    const hours = date.getHours().toString().padStart(2, '0'); 
+    const minutes = date.getMinutes().toString().padStart(2, '0'); 
+    return `${year}-${month}-${day} ${hours}:${minutes}`; 
+  },
+
   //筛选按钮
   onFilterTap: function () {
     wx.showActionSheet({
       itemList: ['综合', '最新'],
       success: function (res) {
         console.log(res.tapIndex);
-        // 根据选择的索引做进一步操作
       },
       fail: function (res) {
         console.log(res.errMsg);
@@ -62,5 +99,4 @@ Page({
     });
   }
 
-  
 })
