@@ -5,7 +5,7 @@ cloud.init( )
 const db = cloud.database() 
 
 exports.main = async (event, context) => {
-  const { title, content } = event;
+  const { title, content, category } = event;
   const now = new Date();
 
   try {
@@ -14,7 +14,9 @@ exports.main = async (event, context) => {
       data: {
         title: title,
         content: content,
-        time: now
+        // category 是 db.general post 的 Forage key, 指向 db.postcategory 
+        category: category,
+        time: now,
       }
     });
     return {
