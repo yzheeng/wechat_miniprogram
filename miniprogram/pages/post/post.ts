@@ -55,8 +55,19 @@ Page({
         });
       }
     });
-  
-  
-  }
+    wx.switchTab({
+      url:'/pages/index/index' //返回
+    });
+    
+  },
+
+exitPost(){
+  wx.switchTab({
+    url:'/pages/index/index' //返回
+  });
+}
+
+
+
 });
 

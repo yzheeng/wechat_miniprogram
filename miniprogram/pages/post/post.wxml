@@ -9,4 +9,5 @@
     <textarea class="textarea-content" placeholder="请输入内容" value="{{content}}" bindinput="updateContent"/>
   </view>
   <button class="submit-btn" bindtap="submitPost">提交</button>
+  <button class="exit-btn" bindtap="exitPost">返回</button> 
 </view>
