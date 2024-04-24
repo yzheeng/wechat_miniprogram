@@ -1,10 +1,10 @@
 {
   "pages": [
-    "pages/post/post",
     "pages/index/index",
     "pages/board/board",
     "pages/messages/messages",
-    "pages/me/me"
+    "pages/me/me",
+    "pages/post/post"
     
 
     
