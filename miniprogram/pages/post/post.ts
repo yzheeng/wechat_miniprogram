@@ -23,6 +23,9 @@ Page({
     this.fetchCategory();
   },
 
+  onshow: function(){
+  },
+  //更新选择的类型
   updateType : function(event : any){
     const index = event.detail.value;
     const selected_category_name = this.data.categories[index].type;
@@ -32,7 +35,7 @@ Page({
       selectedTypeID: selected_category_ID,
     })
   },
-  // 获取发帖分类， 填入类型选择框
+  // 获取帖子类型
   fetchCategory: function () {
     wx.cloud.callFunction({
       name: 'get_post_category'
@@ -51,13 +54,13 @@ Page({
         console.log("拉取帖子分类信息失败", err);
       })
   },
-  //输入标题
+  //标题输入
   updateTitle(event: any) {
     this.setData({
       title: event.detail.value // 更新标题
     });
   },
-  //输入内容
+  //内容输入
   updateContent(event: any) {
     this.setData({
       content: event.detail.value // 更新内容
@@ -65,10 +68,19 @@ Page({
   },
   //提交post
   submitPost() {
-    const { title, content } = this.data;
-    if (!title || !content) {
+    const app = getApp();
+    //检查登录状态
+    if(app.getLoginStatus() == false){
       wx.showToast({
-        title: '标题和内容不能为空',
+        title: "请登录后再发帖",
+        icon: 'none',
+      })
+      return;
+    }
+    const { title, content , selectedTypeID} = this.data;
+    if (!title || !content || !selectedTypeID) {
+      wx.showToast({
+        title: '标题/类型/内容不能为空',
         icon: 'none'
       });
       return;
@@ -77,11 +89,13 @@ Page({
       // call 云函数 new_post, 添加新的post到db
       name: 'new_post',
       data: {
+        uid: app.getOpenId(),
         title: title,
         content: content,
         category: this.data.selectedTypeID,
       },
-      success: res => {
+      success:(res : any) => {
+        console.log(res);
         wx.showToast({
           title: '提交成功',
           icon: 'success'

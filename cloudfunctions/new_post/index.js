@@ -5,13 +5,14 @@ cloud.init( )
 const db = cloud.database() 
 
 exports.main = async (event, context) => {
-  const { title, content, category } = event;
+  const {uid, title, content, category } = event;
   const now = new Date();
 
   try {
     // 向“general_post”添加数据
     const result = await db.collection('general_post').add({
       data: {
+        uid: uid,
         title: title,
         content: content,
         // category 是 db.general post 的 Forage key, 指向 db.postcategory 

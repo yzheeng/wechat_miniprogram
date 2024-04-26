@@ -43,6 +43,7 @@ Page({
     this.fetchPosts();
     this.fetchCategory();
   },
+
   //点击事件： 点击post分类
   onCategorySelect: function (event: any) {
     const categoryID = event.currentTarget.dataset.id

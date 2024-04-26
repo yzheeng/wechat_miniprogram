@@ -1,27 +1,49 @@
 /* me.wxss */
+/* 通用容器样式 */
 .container {
   padding: 40rpx;
-}
-
-.user-info {
-  align-items: center;
   display: flex;
   flex-direction: column;
-  margin-bottom: 50rpx;
+  align-items: center;
 }
 
-.user-avatar {
+/* 头像按钮样式 */
+.avatar-wrapper {
+  margin-bottom: 20rpx;
+  border: none;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 添加对齐样式以确保文本居中 */
+}
+
+.avatar {
   width: 120rpx;
   height: 120rpx;
   border-radius: 60rpx;
+  background-color: #f0f0f0;
+  background-size: cover;
+  background-position: center;
 }
 
-.user-nickname {
-  margin-top: 20rpx;
-  font-size: 32rpx;
-  color: #333;
+.text-avatar {
+  margin-top: 10rpx; /* 调整文本与头像的间距 */
+  font-size: 28rpx; /* 文本大小 */
+  color: #666; /* 文本颜色 */
 }
 
+
+/* 昵称输入框样式
+.weui-input {
+  width: 90%;
+  margin-bottom: 30rpx;
+  padding: 10rpx;
+  border: 1px solid #ccc;
+  border-radius: 5rpx;
+  font-size: 30rpx;
+} */
+
+/* 菜单列表样式 */
 .menu-list {
   width: 100%;
 }
@@ -31,4 +53,7 @@
   border-top: 1px solid #ccc;
   text-align: center;
   font-size: 30rpx;
+  background-color: #f8f8f8;
 }
+
+
