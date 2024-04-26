@@ -1,14 +1,18 @@
 <!-- me.wxml -->
 <view class="container">
-  <view class="user-info">
-    <image class="user-avatar" src="{{userInfo.avatar}}" mode="aspectFill"></image>
-    <text class="user-nickname">{{userInfo.nickname}}</text>
-  </view>
+  <button class="avatar-wrapper" hidden="{{!logged}}" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+    <image class="avatar" src="{{avatarUrl}}"></image>
+    <text>点击获取头像</text>
+  </button>
+  <!-- <input type="nickname" class="weui-input" placeholder="请输入昵称" /> -->
 
 
   <view class="menu-list">
-    <view class="menu-item" bindtap="userLogin">
+    <view class="menu-item" hidden="{{logged}}" bindtap="userLoginBtn">
       <text>登录</text>
+    </view>
+    <view class="menu-item" bindtap="myposts">
+      <text>我的发帖</text>
     </view>
     <view class="menu-item" bindtap="viewHistory">
       <text>浏览记录</text>
@@ -16,7 +20,7 @@
     <view class="menu-item" bindtap="navigateToSettings">
       <text>设置</text>
     </view>
-    <view class="menu-item" bindtap="logout">
+    <view class="menu-item" hidden="{{!logged}}" bindtap="logout">
       <text>退出登录</text>
     </view>
   </view>

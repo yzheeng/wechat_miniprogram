@@ -1,10 +1,13 @@
 {
   "pages": [
+    "pages/me/me",
     "pages/index/index",
     "pages/board/board",
     "pages/messages/messages",
-    "pages/me/me",
+    
     "pages/post/post"
+    
+
     
   ],
   "window": {

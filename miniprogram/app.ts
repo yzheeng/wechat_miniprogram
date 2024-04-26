@@ -1,6 +1,38 @@
 // app.ts
+interface IAppOption{
+  globalData:{
+    isLoggedIn: boolean,
+    open_id: string,
+  },
+  getLoginStatus(): boolean,
+  setLoginStatus(status : boolean) : void,
+  getOpenId() : string,
+  setOpenId(open_id: string) : void,
+  
+}
+
 App<IAppOption>({
-  globalData: {},
+  globalData: {
+    isLoggedIn: false,// 登录状态， false是未登录，  true是登录
+    open_id: '',
+  },
+
+  getLoginStatus() {
+    return this.globalData.isLoggedIn;
+  },
+
+  setLoginStatus(status : boolean){
+    this.globalData.isLoggedIn = status;
+  },
+  getOpenId(){
+    return this.globalData.open_id
+  },
+
+  setOpenId(openId){
+    this.globalData.open_id = openId
+  },
+
+  
 
   onLaunch() {
     // 初始化云环境
@@ -18,12 +50,8 @@ App<IAppOption>({
     logs.unshift(Date.now());
     wx.setStorageSync('logs', logs);
 
-    // 登录
-    wx.login({
-      success: res => {
-        // console.log(res.code);
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-      },
-    });
+
   },
+
+  
 });

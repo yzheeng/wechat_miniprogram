@@ -6,57 +6,85 @@ Page({
       avatar: "", // 用户头像
       nickname: "用户昵称", // 用户昵称
     },
-    logged: false // 登录状态标记
+    // 这个登录标识符是用于控制wxml组件显示的
+    logged: false,
+    avatarUrl: "",
+  },
+
+  onShow: function(){
+    //页面显示时，设置登录标识符与全局登录状态同步
+    const app = getApp();
+    this.setData({
+      logged : app.getLoginStatus(),
+    })
+    console.log("current login status:", this.data.logged);
+    console.log("current openId: ", app.getOpenId());
+  },
+
+  //用户头像
+  onChooseAvatar: function (event: any) {
+    this.setData({
+      avatarUrl: event.detail.avatarUrl
+    })
   },
 
   // 用户登录方法
-  userLogin: function () {
-    // 检查用户是否已经登录
-    if (this.data.logged) {
+  userLoginBtn: function () {
+    const app = getApp();
+      // 检查用户是否已经登录
+    if (app.getLoginStatus()) {
       wx.showToast({
         title: '您已经登录了',
         icon: 'none'
       });
       // 如果已登录，直接返回
-      return; 
+      return;
     }
-    // 请求用户授权获取个人信息
-    wx.getUserProfile({
-      desc: '用于完善会员资料', // 授权描述信息
-      success: (res) => {
-        console.log("拿到的用户信息：", res.userInfo); // 控制台打印获取的用户信息
-        // 更新页面数据
-        this.setData({
-          userInfo: {
-            avatar: res.userInfo.avatarUrl, // 更新用户头像信息
-            nickname: res.userInfo.nickName // 更新昵称为微信用户昵称
-          },
-          logged: true // 更新登录状态为已登录
-        });
-        // 显示登录成功提示
-        wx.showToast({
-          title: '登录成功',
-          icon: 'success'
-        });
+    // 登录
+    wx.login({
+      //拿到凭证code
+      success: res => {
+        console.log("login code: ", res.code);
+        //调用登录云函数
+        wx.cloud.callFunction({
+          name: 'user_login',
+          data: {
+            code: res.code,
+          },//登录成功
+          success: (res: any) => {
+            // 设置open id
+            app.setOpenId(res.result.data.open_id);
+            wx.showToast({
+              title: '登录成功',
+              icon: 'none'
+            });
+            //设置登录状态
+            this.setData({logged : true})
+            app.setLoginStatus(true);
+          },//登录失败
+          fail: ((error: any) => {
+            console.log("error", error);
+          })
+        })
       },
-      fail: () => {
-        // 登录失败时显示提示
-        wx.showToast({
-          title: '登录失败',
-          icon: 'none'
-        });
-      }
     });
   },
 
   // 用户登出方法
   logout: function () {
-    // 重置用户信息和登录状态
+    const app = getApp()
+    if(app.getLoginStatus() == false){
+      return;
+    }
+      // 重置用户信息和登录状态
     this.setData({
       userInfo: { nickname: "用户昵称", avatar: "" }, // 重置为初始昵称和移除头像
-      logged: false // 设置登录状态为未登录
+      logged: false 
     });
-    // 显示已退出登录提示
+      //更改 登录状态 
+    app.setLoginStatus(false);
+    app.setOpenId('');
+      // 显示已退出登录提示
     wx.showToast({
       title: '已退出登录',
       icon: 'success'

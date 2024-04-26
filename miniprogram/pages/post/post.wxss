@@ -4,7 +4,7 @@
   font-family: Arial, sans-serif;
 }
 
-.title-group, .content-group {
+.title-group, .type-group, .content-group {
   margin-bottom: 20px;
 }
 
@@ -15,7 +15,7 @@
   margin-bottom: 5px;
 }
 
-.input-title, .textarea-content {
+.input-title, .textarea-content, .picker-display {
   border: 2px solid #007aff;
   border-radius: 8px;
   padding: 12px;
@@ -23,7 +23,7 @@
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.input-title{
+.input-title, .picker-display {
   width: 260px;
 }
 
@@ -43,3 +43,4 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
+
