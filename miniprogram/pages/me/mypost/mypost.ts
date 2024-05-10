@@ -11,13 +11,16 @@ Page({
   },
 
   // 拉取发帖
-  // paramater: category -> 拉取对应分类post
-  // parmater: none -> 默认拉取全部post 
-  fetchPosts: function (category? : string) {
+  fetchPosts: function () {
+    //拉取openID
+    const app = getApp();
+    const openID = app.getOpenId()
+    console.log("my post openId: ", openID);
+
     wx.cloud.callFunction({
       // 云函数名称
-      name: 'get_post',
-      data: {categoryID: category}
+      name: 'get_my_posts',
+      data: {openID : openID}
     })
       .then((res: any) => {
         // console.log('帖子数据信息:', res);
