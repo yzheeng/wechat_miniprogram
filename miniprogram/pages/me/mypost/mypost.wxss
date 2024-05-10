@@ -1,0 +1,31 @@
+/* 帖子列表 */
+.post-list {
+  width: 100%;
+}
+
+.post-item {
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  border: 1px solid #ccc;
+  border-radius: 10rpx;
+}
+
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.post-title {
+  font-weight: bold;
+  font-size: 32rpx;
+}
+
+.post-time {
+  color: #999;
+  font-size: 24rpx;
+}
+
+.post-content {
+  margin-bottom: 10rpx;
+}

@@ -1,0 +1,18 @@
+<!--pages/me/mypost/mypost.wxml-->
+<scroll-view class="post-list" scroll-y="true">
+    <block wx:for="{{posts}}" wx:key="id">
+      <view class="post-item">
+        <view class="post-header">
+          <text class="post-title">{{item.title}}</text>
+          <text class="post-time">{{item.time}}</text>
+        </view>
+        <view class="post-content">
+          <text class="post-summary">{{item.content}}</text>
+          <!-- <text class="post-id">ID: {{item.id}}</text>  -->
+        </view>
+        <view wx:if="{{item.imageUrl}}" class="post-image-wrapper">
+          <image class="post-image" src="{{item.imageUrl}}" mode="aspectFill"></image>
+        </view>
+      </view>
+    </block>
+  </scroll-view>

@@ -11,10 +11,10 @@
     <view class="menu-item" hidden="{{logged}}" bindtap="userLoginBtn">
       <text>登录</text>
     </view>
-    <view class="menu-item" bindtap="myposts">
+    <view class="menu-item" hidden="{{!logged}}" bindtap="navigateToMyPosts">
       <text>我的发帖</text>
     </view>
-    <view class="menu-item" bindtap="viewHistory">
+    <view class="menu-item" hidden="{{!logged}}" bindtap="viewHistory">
       <text>浏览记录</text>
     </view>
     <view class="menu-item" bindtap="navigateToSettings">

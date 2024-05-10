@@ -5,7 +5,8 @@
     "pages/board/board",
     "pages/messages/messages",
     
-    "pages/post/post"
+    "pages/post/post",
+    "pages/me/mypost/mypost"
     
 
     

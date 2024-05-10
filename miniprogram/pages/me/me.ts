@@ -90,4 +90,11 @@ Page({
       icon: 'success'
     });
   },
+  navigateToMyPosts: function () {
+    // 使用微信小程序的页面跳转 API
+    wx.navigateTo({
+      url: '/pages/me/mypost/mypost'
+    });
+  },
+  
 });
